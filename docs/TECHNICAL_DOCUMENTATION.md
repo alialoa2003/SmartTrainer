@@ -61,14 +61,6 @@
 └─────────────┴────────────────────────────────────────────────────────┘
 ```
 
-### What "Vibe Coding by Antigravity" Contributes
-
-This appears to be a development approach/branding for rapid AI-assisted development. Based on the codebase, the development focuses on:
-- Pragmatic biomechanical implementations
-- Geometric rule-based "intelligence"
-- Extensive inline documentation explaining the reasoning behind thresholds
-- Iterative refinement of classification rules (visible in detailed comments)
-
 ---
 
 ## 2. Architecture & System Design
@@ -122,38 +114,27 @@ This appears to be a development approach/branding for rapid AI-assisted develop
 
 ### Is There Any AI Involved?
 
-> **⚠️ CRITICAL FINDING: This app does NOT use any AI models, machine learning, LLMs, or cloud AI APIs for its core functionality.**
+**YES, Smart Trainer uses a sophisticated multi-tier hybrid architecture:**
 
-The "AI" in "Smart Trainer" is a **marketing term**. The application uses:
+#### 1. Real-Time Processing (On-Device)
+- **Pose Estimation (AI)**: Uses **MediaPipe Pose Landmarker**, a pre-trained deep learning model from Google.
+  - Detects 33 body landmarks in real-time at 30fps.
+  - Runs entirely on-device using GPU acceleration.
+- **Rule-Based Logic**: Deterministic geometric heuristics for:
+  - Exercise Classification (pattern matching body positions).
+  - Rep Counting (state machine tracking movement phases).
+  - Instant Feedback Cues (angle-based biomechanical checks).
 
-| What It Claims | What It Actually Uses |
-|----------------|----------------------|
-| AI Form Analysis | Geometric angle calculations + rule-based heuristics |
-| AI Exercise Detection | Body position pattern matching with hardcoded thresholds |
-| Smart Recommendations | Pre-defined feedback messages based on angle violations |
-
-#### What the App DOES Use
-
-1. **MediaPipe Pose Landmarker** - A pre-trained on-device ML model (from Google)
-   - Purpose: Detects 33 body keypoints from camera images
-   - This IS machine learning, but it's a **pre-packaged SDK**, not custom AI
-   - Runs entirely on-device (no cloud calls)
-
-2. **Rule-Based Classification** - Pure TypeScript code
-   - Calculates joint angles using trigonometry
-   - Compares positions against hardcoded thresholds
-   - Uses if/else chains to determine exercise type
-
-3. **Geometric Biomechanical Analysis**
-   - All scoring is done via angle calculations
-   - Example: "If knee angle < 120° AND hip angle < 120°, score as deep squat"
-
-#### Optional Backend (Not Core Functionality)
-
-There IS an optional backend API configured at `http://192.168.1.2:8000` that could potentially run AI models for post-workout analysis. However:
-- It's optional (app works fully offline)
-- It's a local network server (not a cloud service)
-- The app doesn't depend on it for real-time functionality
+#### 2. Advanced Form Analysis (Remote Model via FastAPI)
+- **Deep Learning Model**: A specialized model hosted on a remote server for high-fidelity form analysis.
+- **FastAPI Integration**: The application communicates with a **FastAPI backend** (configured at `http://192.168.1.2:8000`).
+- **5-Pillar Feedback System**: The remote model performs a comprehensive analysis of each set across five critical biomechanical domains:
+  - **Stability**: Measures balance and joint stability throughout the movement.
+  - **Posture**: Analyzes joint stacking, torso alignment, and spinal neutrality.
+  - **Range of Motion**: Validates movement depth and full joint extension.
+  - **Movement Quality**: Assesses tempo, rhythm, and smoothness of execution.
+  - **Core Bracing**: Evaluates spinal integrity and abdominal pressure management.
+- **Personalized Recommendations**: The server returns an AI-generated summary, specific scores for each pillar, and actionable solutions for technique improvement.
 
 ### How Decisions and Recommendations Are Generated
 

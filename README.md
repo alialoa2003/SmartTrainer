@@ -129,27 +129,26 @@
 
 ### Is There Any AI Involved?
 
-**YES, but it's a hybrid approach:**
+**YES, it's a multi-tier hybrid approach:**
 
-#### AI Components (Computer Vision)
-- **MediaPipe Pose Landmarker** (Google's pre-trained TensorFlow Lite model)
-  - Deep learning model trained on millions of images
-  - Detects 33 body keypoints in real-time
-  - Runs on-device using GPU acceleration
-  - This is the ONLY machine learning component
+#### 1. Real-Time Processing (On-Device AI + Heuristics)
+- **Pose Detection (AI)**: **MediaPipe Pose Landmarker** (Google's pre-trained TensorFlow Lite model).
+  - Detects 33 body keypoints in real-time.
+  - Runs on-device using GPU acceleration.
+- **Exercise Classification**: 100% rule-based geometric heuristics.
+- **Form Analysis (Real-Time)**: Biomechanical rules and angle calculations for instant cues.
+- **Rep Counting**: State machine with threshold detection.
 
-#### Non-AI Components (Rule-Based Logic)
-- **Exercise Classification**: 100% rule-based geometric heuristics
-- **Form Analysis**: Biomechanical rules and angle calculations
-- **Rep Counting**: State machine with threshold detection
-- **Feedback Generation**: Conditional logic based on joint angles
-
-**The app does NOT use:**
-- ❌ Large Language Models (LLMs)
-- ❌ Custom-trained ML models
-- ❌ Cloud-based AI APIs
-- ❌ Neural networks for classification
-- ❌ Machine learning for rep counting
+#### 2. Comprehensive Post-Workout Analysis (Remote AI Model)
+- **Final Feedback Model**: A specialized deep learning model hosted on a remote server.
+- **FastAPI Integration**: The application sends workout data to a **FastAPI-powered backend** for deep analysis.
+- **Pillar-Based Scoring**: The remote model analyzes the entire set across **5 Biomechanical Pillars**:
+  - **Stability**: Overall body control and joint stability.
+  - **Posture**: Joint stacking and torso alignment.
+  - **Range of Motion**: Depth of movement and full extension.
+  - **Movement Quality**: Tempo, efficiency, and smoothness.
+  - **Core Bracing**: Spinal integrity and bracing efficiency.
+- **AI Summary**: The server returns custom summary feedback and specific solutions for improvement.
 
 ### How Decisions and Recommendations Are Generated
 
@@ -812,12 +811,6 @@ if (!detected) {
    - Hard to add new features (e.g., workout plans, social sharing)
    - No plugin system for custom exercises
    - Tightly coupled components
-
-#### 🐛 Known Issues (from conversation history)
-
-- **Chest Fly / Lateral Raise Confusion**: Bent knees trigger wrong classification
-- **Detection Hesitation**: Auto-detect waits too long before locking
-- **Posture Sensitivity**: Seated vs standing detection is fragile
 
 ---
 
