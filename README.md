@@ -762,44 +762,6 @@ if (!detected) {
 
 ---
 
-## 10. How to Explain This App to Others
-
-### Simple High-Level Explanation
-
-> **"Smart Trainer is like having a personal trainer in your pocket. Point your phone's camera at yourself while working out, and it automatically counts your reps and tells you if your form is good or bad. It uses Google's AI to track your body movements, then applies biomechanical rules to give you instant coaching cues like 'Chest Up' or 'Go Deeper'. It works completely offline and supports 22 different exercises."**
-
-### Technical Explanation
-
-> **"GymScore is a React Native mobile app that performs real-time exercise form analysis using computer vision. It uses MediaPipe Pose Landmarker (a TensorFlow Lite model) to detect 33 body keypoints at 30fps, then applies geometric heuristics to classify exercises and analyze form. The system uses a hybrid approach: AI for pose estimation, rule-based logic for everything else. It features a state machine for rep counting, a 5-pillar biomechanical scoring system, and an auto-detection mode with a locking mechanism to prevent classification flickering. All processing happens on-device using GPU acceleration via React Native Worklets. Currently supports 15 exercises across 4 categories."**
-
-### How to Defend the Design in a Discussion
-
-#### Why Rule-Based Instead of ML for Classification?
-
-**Pros:**
-- ✅ **Explainable**: You can debug why an exercise was classified a certain way because we can trace through the angle calculations.
-- ✅ **No Training Data**: Don't need thousands of labeled exercise videos.
-- ✅ **Fast Iteration**: Can tweak rules in minutes, no retraining.
-- ✅ **Deterministic**: Same input always produces same output.
-- ✅ **Lightweight**: No additional ML models to bundle.
-- ✅ **Proven Accuracy**: Heuristics are tuned to handle multiple viewing angles and distinguish between all supported movements.
-
-
-> "The rule-based approach provides high precision and explainability. By mapping biomechanical principles directly into code, we achieve robust detection that works across multiple viewing angles and different body types without the 'black box' issues of pure ML classifiers. Our extensive testing ensures the app reliably distinguishes between all exercises."
-
-#### Why No Workout History?
-
-> "The current version prioritizes immediate, high-quality form coaching. By focusing on real-time feedback, we provide the most value where it counts: during the movement itself. Persistence and advanced workout tracking are roadmap items that will build upon this solid real-time foundation."
-
-#### Why MediaPipe Instead of Custom Model?
-
-**Defense:**
-> "MediaPipe is Google's state-of-the-art pose estimation model, trained on millions of images. Building a custom model would require massive datasets, GPU clusters, and months of training. MediaPipe gives us production-quality pose detection out of the box, optimized for mobile, with GPU acceleration. It's the industry standard for a reason."
-
-#### Why No Cloud/Backend?
-
-**Defense:**
-> "On-device processing has three major advantages: (1) Works offline, (2) No API costs, (3) Privacy-friendly (no data leaves device). For a fitness app, these are critical. Users want to work out anywhere, even in gyms with poor WiFi. The trade-off is no cross-device sync, but that's acceptable for v1."
 
 ---
 

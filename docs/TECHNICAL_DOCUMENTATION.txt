@@ -811,32 +811,6 @@ This app uses **React local state** (useState/useRef). No Redux, Zustand, or sim
 
 ---
 
-## 10. How to Explain This App to Others
-
-### Simple High-Level Explanation
-
-> "Smart Trainer is a fitness app that watches you work out through your phone camera and tells you if you're doing the exercise correctly. It counts your reps automatically and scores your form based on things like depth, posture, and stability. Think of it like a virtual personal trainer that gives you real-time feedback."
-
-### Technical Explanation
-
-> "This is a React Native application that uses MediaPipe's pose detection SDK to extract 33 body keypoints from camera frames. The keypoints are then processed through a robust rule-based geometric analysis engine that calculates joint angles and compares them against optimized biomechanical thresholds. The app accurately classifies exercises from multiple viewing angles using advanced pattern matching and scores form quality using a comprehensive 5-pillar system. This hybrid approach combines the power of AI for pose estimation with the precision and explainability of biomechanical heuristics."
-
-### How to Defend the Design in a Discussion
-
-**Q: "Why not use actual AI for classification?"**
-> "The geometric approach provides deterministic, explainable results. We know exactly why an exercise was classified a certain way because we can trace through the angle calculations. ML classifiers would be black boxes. Also, rule-based systems require no training data collection and work consistently across devices."
-
-**Q: "Why are thresholds used instead of pure ML?"**
-> "The geometric approach provides deterministic, explainable results that are directly mapped to biomechanical standards. We've refined these thresholds to work reliably across a wide range of body types and camera placements, ensuring high accuracy without the opacity of black-box ML models."
-
-**Q: "Is there a plan for persistence?"**
-> "The current implementation focuses on delivering the best real-time coaching experience. By prioritizing immediate feedback, we address the most critical need for safe and effective training. Persistent storage for progress tracking is a natural extension for future updates."
-
-**Q: "How accurate is the pose detection?"**
-> "The accuracy depends on MediaPipe, which is Google's production-grade pose estimation library. It handles occlusion, different body types, and varying lighting reasonably well. Our geometric analysis is only as good as the keypoints provided."
-
-**Q: "What makes this better than just watching a YouTube tutorial?"**
-> "Real-time feedback. The app tells you *during* the movement if your form is off. You don't have to record yourself, watch it back, compare to a reference, and try to spot differences. The feedback loop is immediate."
 
 ---
 
