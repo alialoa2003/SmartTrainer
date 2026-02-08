@@ -1,6 +1,5 @@
 # Smart Trainer - Complete Technical Documentation
 
-> **Built with Vibe Coding by Antigravity**  
 > A real-time AI fitness coach using computer vision for exercise form analysis and rep counting.
 
 ---
@@ -56,14 +55,6 @@
    - Posture (joint stacking, torso angle)
    - Efficiency (bar path, tempo)
    - Bracing (spinal integrity)
-
-### What "Vibe Coding by Antigravity" Contributes
-
-This project was built using **Vibe Coding**, an AI-assisted development approach by Antigravity. The development process involved:
-- Rapid prototyping of the exercise classification system
-- Iterative refinement of biomechanical rules based on real-world testing
-- Quick implementation of 15 exercise-specific analyzers
-- Continuous debugging and optimization of pose detection logic
 
 ---
 
